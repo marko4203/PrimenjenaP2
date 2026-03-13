@@ -1,0 +1,5 @@
+(sym_lib_table
+  (version 7)
+  (lib (name "Fotootpornik")(type "Altium")(uri "C:/Users/marko/Desktop/PCB/Fotootpornik.SchLib")(options "")(descr ""))
+  (lib (name "Grupa1-P2-altium-import")(type "KiCad")(uri "${KIPRJMOD}/Grupa1-P2-altium-import.kicad_sym")(options "")(descr ""))
+)
