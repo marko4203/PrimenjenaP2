@@ -1,0 +1,6 @@
+Removed Pin From Net: NetName=RD2 Pin=P5-2
+Removed Pin From Net: NetName=RD3 Pin=P5-3
+Change Component Description : Designator=IC2 Old Description=Digital Signal Processors, DSP, DSC General Purpose New Description=Digital Signal Processors, DSP, DSC General Purpose | Microchip Technology Inc. DSPIC30F4013-30I/P
+Added Pin To Net: NetName=RD3 Pin=P5-2
+Added Pin To Net: NetName=RD2 Pin=P5-3
+Added Room: Name=P2-sematik
