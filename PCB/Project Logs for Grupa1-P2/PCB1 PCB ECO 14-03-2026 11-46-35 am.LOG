@@ -1,0 +1,8 @@
+Change Component Designator: OldDesignator=  NewDesignator=IC2
+Change Component Description : Designator=IC2 Old Description=Digital Signal Processors, DSP, DSC General Purpose New Description=Digital Signal Processors, DSP, DSC General Purpose | Microchip Technology Inc. DSPIC30F4013-30I/P
+Added Pin To Net: NetName=GND Pin=C14-1
+Added Pin To Net: NetName=GND Pin=C15-1
+Added Pin To Net: NetName=VCC Pin=IC3-4
+Added Pin To Net: NetName=5V Pin=IC3-9
+Added Member To Class: ClassName=P2-sematik Member=Component IC2 DSPIC30F4013-30I/P
+Added Room: Name=P2-sematik

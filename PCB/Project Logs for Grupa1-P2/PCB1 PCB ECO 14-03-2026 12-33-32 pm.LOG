@@ -1,0 +1,10 @@
+Removed Pin From Net: NetName=RD8 Pin=P6-2
+Removed Pin From Net: NetName=RF6 Pin=P6-3
+Added Pin To Net: NetName=RB9 Pin=IC2-38
+Added Pin To Net: NetName=RB9 Pin=P6-2
+Added Net: Name=RB9
+Added Pin To Net: NetName=RB10 Pin=IC2-37
+Added Pin To Net: NetName=RB10 Pin=P6-3
+Added Net: Name=RB10
+Added Member To Class: ClassName=P2-sematik Member=Component D9 Diode 1N4007
+Added Room: Name=P2-sematik
