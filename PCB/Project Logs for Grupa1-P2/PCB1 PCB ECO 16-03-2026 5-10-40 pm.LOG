@@ -1,0 +1,22 @@
+Removed Pin From Net: NetName=U2TX Pin=P3-2
+Removed Pin From Net: NetName=Tx_bluetooth Pin=P3-3
+Removed Pin From Net: NetName=5V Pin=P3-4
+Removed Pin From Net: NetName=GND Pin=P3-6
+Removed Pin From Net: NetName=U1ATX Pin=P4-2
+Removed Pin From Net: NetName=U1ARX Pin=P4-3
+Removed Pin From Net: NetName=5V Pin=P4-4
+Removed Pin From Net: NetName=GND Pin=P4-6
+Change Component Footprint: Designator=P3 Old Footprint=HDR1X6 New Footprint=HDR1X4
+Change Component Footprint: Designator=P4 Old Footprint=HDR1X6 New Footprint=HDR1X4
+Change Component Footprint: Designator=C7 Old Footprint=RAD-0.2 New Footprint=RAD-0.1
+Change Component Footprint: Designator=C8 Old Footprint=RAD-0.2 New Footprint=RAD-0.1
+Change Component Comment : Designator=P3 Old Comment=Prisluškivanje New Comment=Prisluskivanje
+Added Pin To Net: NetName=U2TX Pin=P3-1
+Added Pin To Net: NetName=Tx_bluetooth Pin=P3-2
+Added Pin To Net: NetName=5V Pin=P3-3
+Added Pin To Net: NetName=GND Pin=P3-4
+Added Pin To Net: NetName=U1ATX Pin=P4-1
+Added Pin To Net: NetName=U1ARX Pin=P4-2
+Added Pin To Net: NetName=5V Pin=P4-3
+Added Pin To Net: NetName=GND Pin=P4-4
+Added Room: Name=P2-sematik
