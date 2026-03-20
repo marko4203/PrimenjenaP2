@@ -1,0 +1,5 @@
+Removed Pin From Net: NetName=RB10 Pin=IC2-37
+Removed Pin From Net: NetName=RB9 Pin=IC2-38
+Added Pin To Net: NetName=RB9 Pin=IC2-37
+Added Pin To Net: NetName=RB10 Pin=IC2-38
+Added Room: Name=P2-sematik

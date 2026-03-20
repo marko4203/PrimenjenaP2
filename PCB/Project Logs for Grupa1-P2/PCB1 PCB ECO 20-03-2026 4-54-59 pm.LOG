@@ -1,0 +1,4 @@
+Removed Pin From Net: NetName=NetC1_1 Pin=C2-1
+Change Component Description : Designator=IC2 Old Description=Digital Signal Processors, DSP, DSC General Purpose New Description=Digital Signal Processors, DSP, DSC General Purpose | Microchip Technology Inc. DSPIC30F4013-30I/P
+Added Pin To Net: NetName=5V Pin=C2-1
+Added Room: Name=P2-sematik
