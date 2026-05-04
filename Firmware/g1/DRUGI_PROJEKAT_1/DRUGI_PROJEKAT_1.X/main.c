@@ -8,27 +8,11 @@
 
 #include "timer1.h"
 #include "timer2.h"
-#include "adc.h"
 
 _FOSC(CSW_FSCM_OFF & XT_PLL4);
 _FWDT(WDT_OFF);
 
-#define PAUZA_PROMENA_SMERA_MS   300
-
 #define PWM_PERIODA              2499
-#define PWM_PUNA_BRZINA          2500
-#define PWM_STOP_BRZINA          0
-
-#define PWM_BRZINA_PRAVO_LEVI    2300
-#define PWM_BRZINA_PRAVO_DESNI   2250
-#define PWM_BRZINA_NAZAD_LEVI    2300
-#define PWM_BRZINA_NAZAD_DESNI   2250
-
-#define VREME_SKRETANJA_MS       300
-#define KASNJENJE_GLAVNE_PETLJE  60
-
-#define GRANICA_PREPREKE_CM      20.0
-#define GRANICA_FOTO             800
 
 volatile unsigned char tempRX;
 volatile unsigned int broj, broj1, broj2;
@@ -39,8 +23,6 @@ int n = 0;
 
 int cm_napred, cm_levi;
 
-int zabrana_posle_stop = 0;
-unsigned int brojac_skretanja = 0;
 
 void initUART1(void) {
     U1BRG = 0x0040;
@@ -174,7 +156,7 @@ void motori_stop(void)
 
 void motori_napred(void)
 {   
-    postavi_pwm(2300,2300);
+    postavi_pwm(2250,2250);
     
     LATBbits.LATB11 = 1;
     LATBbits.LATB12 = 0;
@@ -211,7 +193,7 @@ void skreni_levo_slow(void)
 
     LATFbits.LATF0 = 1;
     LATFbits.LATF1 = 0;
-    postavi_pwm(1500,1500);
+    postavi_pwm(1700,1700);
 }
 
 void skreni_desno(void)
@@ -268,13 +250,14 @@ void korekcija_pravca(){
     if(trenutno > 4){
         while(prethodno > trenutno){
             prethodno = trenutno;
-            skreni_levo_slow(); 
-            __delay_ms(70); 
+            skreni_levo(); 
+            __delay_ms(50); 
             motori_stop();
             __delay_ms(1000); 
             trenutno = meri_levi_cm();
         }
     }
+    
 }
 
 
@@ -336,20 +319,23 @@ int main(int argc, char** argv) {
     __builtin_enable_interrupts();
 
     state current = NAPRED, next;
+   
     
     while (1) {
         
         cm_napred = meri_prednji_cm();
+        ispis2("Prednji:");
+        WriteUART2dec2string(cm_napred);
         cm_levi = meri_levi_cm();
-        //WriteUART2dec2string(cm_levi);
-        //WriteUART2(13);   
-      
+        ispis2("Levi:");
+        WriteUART2dec2string(cm_levi);
+        
         switch(current){
             case NAPRED:
                 next = current;
                 motori_napred();
                 LATAbits.LATA11 = 1;
-                if(cm_napred < 12){ next = STOP; }
+                if(cm_napred < 16){ next = STOP; }
                 if(cm_levi > 15){ next = STOP; }
                 break;
             case STOP:
@@ -363,9 +349,9 @@ int main(int argc, char** argv) {
                 next = current;
                 LATAbits.LATA11 = 1;
                 skreni_levo();
-                __delay_ms(900);
+                __delay_ms(980);
                 motori_napred();
-                __delay_ms(520);        
+                __delay_ms(680);        
                 motori_stop();
                 __delay_ms(1000);
                 korekcija_pravca();
@@ -375,7 +361,7 @@ int main(int argc, char** argv) {
                 next = current;
                 LATAbits.LATA11 = 1;
                 skreni_desno();
-                __delay_ms(1350);       
+                __delay_ms(1100);   // ovo  bilo 1350  
                 motori_stop();
                 __delay_ms(1000); 
                 korekcija_pravca();
