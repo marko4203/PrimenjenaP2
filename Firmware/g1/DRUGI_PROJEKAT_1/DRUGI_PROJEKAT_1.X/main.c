@@ -42,8 +42,6 @@ int cm_napred, cm_levi;
 int zabrana_posle_stop = 0;
 unsigned int brojac_skretanja = 0;
 
-/* ================= UART ================= */
-
 void initUART1(void) {
     U1BRG = 0x0040;
     U1MODEbits.ALTIO = 1;
@@ -163,8 +161,6 @@ void postavi_pwm(unsigned int levi, unsigned int desni)
     OC1RS = levi;
     OC2RS = desni;
 }
-
-/* ================= MOTORI ================= */
 
 void motori_stop(void)
 {
@@ -361,7 +357,7 @@ int main(int argc, char** argv) {
                 motori_stop();
                 LATAbits.LATA11 = 0;
                 __delay_ms(1200);
-                if(cm_levi > 10){ next = SKRENI_LEVO; } else { next = SKRENI_DESNO; }
+                if(cm_levi > 15){ next = SKRENI_LEVO; } else { next = SKRENI_DESNO; }
                 break;
             case SKRENI_LEVO:
                 next = current;
