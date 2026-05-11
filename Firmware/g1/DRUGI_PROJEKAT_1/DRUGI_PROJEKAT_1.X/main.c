@@ -21,7 +21,7 @@ volatile unsigned int broj, broj1, broj2;
 char buf[6];
 int n = 0;
 
-int cm_napred, cm_levi;
+float cm_napred, cm_levi;
 
 
 void initUART1(void) {
@@ -248,10 +248,11 @@ void korekcija_pravca(){
     int trenutno = meri_levi_cm();
     int prethodno = 10000;
     if(trenutno > 4){
+        ispis2("Korigujem pravac\r\n");
         while(prethodno > trenutno){
             prethodno = trenutno;
             skreni_levo(); 
-            __delay_ms(50); 
+            __delay_ms(100); 
             motori_stop();
             __delay_ms(1000); 
             trenutno = meri_levi_cm();
@@ -284,7 +285,6 @@ int main(int argc, char** argv) {
     TRISFbits.TRISF4 = 1;
 
     pwm_init();
-
     TRISBbits.TRISB0 = 0;
     TRISBbits.TRISB1 = 0;
     TRISBbits.TRISB2 = 1;
@@ -324,32 +324,31 @@ int main(int argc, char** argv) {
     while (1) {
         
         cm_napred = meri_prednji_cm();
-        ispis2("Prednji:");
-        WriteUART2dec2string(cm_napred);
         cm_levi = meri_levi_cm();
-        ispis2("Levi:");
-        WriteUART2dec2string(cm_levi);
         
         switch(current){
             case NAPRED:
+                ispis2("Vozim napred\r\n");
                 next = current;
                 motori_napred();
                 LATAbits.LATA11 = 1;
                 if(cm_napred < 16){ next = STOP; }
-                if(cm_levi > 15){ next = STOP; }
+                if(cm_levi > 18){ next = STOP; }
                 break;
             case STOP:
+                ispis2("Stajem\r\n");
                 next = current;
                 motori_stop();
                 LATAbits.LATA11 = 0;
                 __delay_ms(1200);
-                if(cm_levi > 15){ next = SKRENI_LEVO; } else { next = SKRENI_DESNO; }
+                if(cm_levi > 18){ next = SKRENI_LEVO; } else { next = SKRENI_DESNO; }
                 break;
             case SKRENI_LEVO:
+                ispis2("Skrecem levo\r\n");
                 next = current;
                 LATAbits.LATA11 = 1;
                 skreni_levo();
-                __delay_ms(980);
+                __delay_ms(930);
                 motori_napred();
                 __delay_ms(680);        
                 motori_stop();
@@ -358,12 +357,14 @@ int main(int argc, char** argv) {
                 next = NAPRED;
                 break;
             case SKRENI_DESNO:
+                ispis2("Skrecem desno\r\n");
                 next = current;
                 LATAbits.LATA11 = 1;
                 skreni_desno();
                 __delay_ms(1100);   // ovo  bilo 1350  
                 motori_stop();
                 __delay_ms(1000); 
+                korekcija_pravca();
                 korekcija_pravca();
                 next = NAPRED;
                 break;
